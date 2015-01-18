@@ -1,0 +1,22 @@
+{
+  "name": "html-next-boilerplate",
+  "description": "Simple boilerplate for an application that will use es6 and webcomponents.",
+  "private": true,
+  "repository": "git@github.com:spenceralger/html-next-boilerplate.git",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "6to5-loader": "~2.0.0",
+    "css-loader": "~0.9.1",
+    "less-loader": "~2.0.0",
+    "page": "~1.5.0",
+    "style-loader": "~0.8.3",
+    "webpack": "~1.5.1",
+    "webpack-dev-server": "~1.7.0"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --hot"
+  },
+  "author": "Spencer Alger <spencer@spenceralger.com>",
+  "license": "Apache 2.0"
+}

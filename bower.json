@@ -1,0 +1,13 @@
+{
+  "name": "html-next-template",
+  "version": "0.0.0",
+  "authors": [
+    "Spencer Alger <spencer@spenceralger.com>"
+  ],
+  "license": "Apache 2.0",
+  "dependencies": {
+    "webcomponentsjs": "~0.5.2",
+    "domready": "~1.0.7"
+  },
+  "devDependencies": {}
+}
