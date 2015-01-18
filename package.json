@@ -1,10 +1,20 @@
 {
-  "name": "html-next-boilerplate",
-  "description": "Simple boilerplate for an application that will use es6 and webcomponents.",
+  "name": "html5-static-boilerplate",
+  "description": "Boilerplate for building a static site using es6 and webcomponents.",
   "private": true,
-  "repository": "git@github.com:spenceralger/html-next-boilerplate.git",
   "version": "0.0.0",
-  "dependencies": {},
+  "license": "Apache 2.0",
+
+  "repository": "git@github.com:spenceralger/html5-static-boilerplate.git",
+  "author": "Spencer Alger <spencer@spenceralger.com>",
+
+  "scripts": {
+    "setup": "[ -d node_modules ] || npm install; [ -d bower_components ] || bower install;",
+    "dev": "npm run setup && webpack-dev-server"
+  },
+
+  "dependencies": {
+  },
   "devDependencies": {
     "6to5-loader": "~2.0.0",
     "css-loader": "~0.9.1",
@@ -13,10 +23,5 @@
     "style-loader": "~0.8.3",
     "webpack": "~1.5.1",
     "webpack-dev-server": "~1.7.0"
-  },
-  "scripts": {
-    "dev": "webpack-dev-server --hot"
-  },
-  "author": "Spencer Alger <spencer@spenceralger.com>",
-  "license": "Apache 2.0"
+  }
 }

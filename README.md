@@ -1,12 +1,11 @@
-# HTML Next boilerplate
+# HTML5 Static boilerplate
 
-Simple boilerplate for an application that will use es6 and webcomponents.
+Boilerplate for a static site that will use es6 and webcomponents to provide a single page app(SPA).
 
-## Get started
-Clone the repo and run:
+## Lets go!
 
 ```sh
-npm install
-bower install
+git clone git@github.com:spenceralger/html5-static-boilerplate.git html5-app
+cd html5-app
 npm run dev
 ```
