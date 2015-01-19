@@ -1,25 +1,26 @@
 import 'styles/style.less';
 import domready from 'domready';
 
-// main view holder
-import AppView from 'el/AppView';
+import View from 'View';
+import {Router} from 'lib/routing';
 
-// pages that will render in the app view
-import HomePage from 'el/HomePage';
-import UserPage from 'el/UserPage';
-import NotFoundPage from 'el/NotFoundPage';
+// pages that will render in the mainView
+import HomePage from 'HomePage';
+import UserPage from 'UserPage';
+import NotFoundPage from 'NotFoundPage';
 
-// create the app view
-var view = new AppView();
+var router = new Router();
+var mainView = new View();
 
-// tell the view about our routes
-view.on('/', HomePage);
-view.on('/user/:id', UserPage);
+// tell the mainView about our routes
+router.on('/', mainView.setter(HomePage));
+router.on('/user/:id', mainView.setter(UserPage));
 
 // 404 catch-all
-view.on('*', NotFoundPage);
+router.otherwise(mainView.setter(NotFoundPage));
 
-// attach the view to the DOM
+// attach the mainView to the DOM
 domready(function () {
-  document.body.appendChild(view);
+  document.body.appendChild(mainView);
+  router.start();
 });

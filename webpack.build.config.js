@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var dirname = require('path').dirname;
 var basename = require('path').basename;
+var join = require('path').join;
 
 module.exports = function (paths, dev) {
   return {
@@ -18,7 +19,7 @@ module.exports = function (paths, dev) {
         {
           test: /\.js$/,
           exclude: /node_modules|bower_components/,
-          loader: '6to5-loader'
+          loader: '6to5-loader?experimental&comments=false&loose=classes'
         },
 
         // less styles
@@ -35,7 +36,7 @@ module.exports = function (paths, dev) {
     resolve: {
       extensions: ['', '.js', '.json'],
       modulesDirectories: ['bower_components', 'node_modules'],
-      root: [ paths.SRC ]
+      root: [ join(paths.SRC, 'components'), paths.SRC ]
     },
 
     // utilize bower.json/main setting for bower_components
