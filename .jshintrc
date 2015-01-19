@@ -1,0 +1,11 @@
+{
+  "browser": true,
+  "unused": true,
+  "undef": true,
+  "esnext": true,
+  "asi": true,
+  "eqnull": true,
+  "globals": {
+    "setImmediate": true
+  }
+}

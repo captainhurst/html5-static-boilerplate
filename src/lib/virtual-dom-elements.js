@@ -1,5 +1,4 @@
 import {h} from 'virtual-dom';
-import _ from 'lodash';
 
 var elements = {};
 

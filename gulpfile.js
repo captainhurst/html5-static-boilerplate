@@ -1,6 +1,7 @@
-var _ = require('lodash');
+/* jshint browser:false, node:true */
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var jshint = require('gulp-jshint');
 var resolve = require('path').resolve;
 var abs = resolve.bind(null, __dirname);
 
@@ -61,6 +62,13 @@ gulp.task('server', function (done) {
     if (err) done(new gutil.PluginError('webpack', err));
     else gutil.log('Server listening at http://localhost:8080');
   });
+});
+
+gulp.task('lint', function () {
+  return gulp.src(resolve(paths.SRC, '**/*.js'))
+    .pipe(jshint({ linter: require('jshint') }))
+    .pipe(jshint.reporter())
+    .pipe(jshint.reporter('fail'));
 });
 
 function getPacker(dev) {

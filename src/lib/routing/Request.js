@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const HOME_PATH = '/';
 const HOME_HASH = '#' + HOME_PATH;
 
@@ -20,12 +22,12 @@ class Request {
 
   // called when the router refuses to process this request
   abandoned() {
-    console.log('request for', this.hash, 'ABANDONED');
+    throw new Error('request for ' + this.hash + ' ABANDONED');
   }
 
   // called when the does not know how to process this request
   unhandled() {
-    console.log('request for', this.hash, 'UNHANDLED');
+    throw new Error('request for ' + this.hash + ' UNHANDLED');
   }
 
   try(route, next) {

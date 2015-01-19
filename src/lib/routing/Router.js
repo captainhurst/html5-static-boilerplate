@@ -4,7 +4,7 @@ import Route from 'lib/routing/Route';
 import Request from 'lib/routing/Request';
 
 class Router {
-  constructor(opts) {
+  constructor() {
     this.routes = [];
     this.fallback = [];
   }

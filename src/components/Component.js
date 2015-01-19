@@ -1,8 +1,7 @@
 import _ from 'lodash'
-import h from 'virtual-dom/h'
+import {h, patch, diff, createElement} from 'virtual-dom'
 import isVnode from 'virtual-dom/vnode/is-vnode'
 import elements from 'lib/virtual-dom-elements'
-import createElement from 'virtual-dom/create-element'
 
 class Component extends HTMLElement {
   static register(tagName, SubComponent) {
@@ -60,7 +59,7 @@ class Component extends HTMLElement {
 
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(/* attrName, oldVal, newVal */) {
 
   }
 
