@@ -39,8 +39,6 @@ paths.BUNDLE = resolve(paths.BUILD, 'bundle.js');
  */
 gulp.task('server', function (done) {
   var express = require('express');
-  var webpack = require('webpack');
-
   var app = express();
   app.use(express.static(paths.SRC));
   app.use(express.static(paths.BUILD));
@@ -66,5 +64,6 @@ gulp.task('server', function (done) {
 });
 
 function getPacker(dev) {
+  var webpack = require('webpack');
   return webpack(require('./webpack.build.config.js')(paths, dev));
 }
