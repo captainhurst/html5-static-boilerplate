@@ -4,24 +4,23 @@
   "private": true,
   "version": "0.0.0",
   "license": "Apache 2.0",
-
   "repository": "git@github.com:spenceralger/html5-static-boilerplate.git",
   "author": "Spencer Alger <spencer@spenceralger.com>",
-
   "scripts": {
     "setup": "[ -d node_modules ] || npm install; [ -d bower_components ] || bower install;",
     "dev": "npm run setup && webpack-dev-server"
   },
-
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "6to5-loader": "~2.0.0",
     "css-loader": "~0.9.1",
+    "express": "~4.11.0",
+    "gulp": "~3.8.10",
+    "gulp-util": "~3.0.2",
     "less-loader": "~2.0.0",
+    "lodash": "~2.4.1",
     "page": "~1.5.0",
     "style-loader": "~0.8.3",
-    "webpack": "~1.5.1",
-    "webpack-dev-server": "~1.7.0"
+    "webpack": "~1.5.1"
   }
 }
