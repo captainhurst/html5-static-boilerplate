@@ -19,7 +19,7 @@
     "gulp-util": "~3.0.2",
     "less-loader": "~2.0.0",
     "lodash": "~2.4.1",
-    "page": "~1.5.0",
+    "page": "git://github.com/visionmedia/page.js#master",
     "style-loader": "~0.8.3",
     "webpack": "~1.5.1"
   }

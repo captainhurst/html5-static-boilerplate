@@ -54,7 +54,7 @@ gulp.task('server', function (done) {
       return asset.name;
     });
 
-    gutil.log(gutil.colors.green('✓'), 're-built', names.join(','));
+    gutil.log(gutil.colors.green('✓'), 're-built', names.join(', '));
   });
 
   app.listen(8000, function (err) {

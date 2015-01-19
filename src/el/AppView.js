@@ -24,9 +24,18 @@ class AppView extends HTMLElement {
 
   // once we are in the DOM, setup the handler
   attachedCallback() {
+    window.location.hash = this._hashDefault();
     page({
       hashbang: true
     });
+  }
+
+  _hashDefault() {
+    var hash = window.location.hash;
+    var base = '#/';
+    if (!hash) return base;
+    var match = hash.match(/^#(\/?)(.*)$/);
+    return base + (match[3] || '');
   }
 
   /**
