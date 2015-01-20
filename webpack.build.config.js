@@ -36,7 +36,10 @@ module.exports = function (paths, dev) {
     resolve: {
       extensions: ['', '.js', '.json'],
       modulesDirectories: ['bower_components', 'node_modules'],
-      root: [ join(paths.SRC, 'components'), paths.SRC ]
+      root: [ join(paths.SRC, 'components'), paths.SRC ],
+      alias: {
+        reflux: join(paths.ROOT, 'node_modules', 'reflux', 'src', 'index.js')
+      }
     },
 
     // utilize bower.json/main setting for bower_components

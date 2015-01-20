@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import elements from 'lib/elements'
 import deku from 'deku'
+import {ListenerMethods} from 'reflux'
 
 var DekuComponent = deku.component();
 
@@ -41,5 +42,7 @@ class Component extends DekuComponent {
   detachedCallback() {}
   attributeChangedCallback(/* attrName, oldVal, newVal */) {}
 }
+
+_.assign(Component.prototype, ListenerMethods);
 
 export default Component
