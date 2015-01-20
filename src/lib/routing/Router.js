@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import component from 'lib/component'
+import component from 'lib/Component'
 import Route from 'lib/routing/Route'
 import Request from 'lib/routing/Request'
 

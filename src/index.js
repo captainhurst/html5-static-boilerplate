@@ -1,5 +1,5 @@
 import {Router} from 'lib/routing'
-import component from 'lib/component'
+import component from 'lib/Component'
 import domready from 'domready'
 
 // general imports...

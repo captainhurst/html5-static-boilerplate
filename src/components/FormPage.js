@@ -1,4 +1,4 @@
-import component from 'lib/component'
+import component from 'lib/Component'
 
 export default component({
   tagName: 'form-page',

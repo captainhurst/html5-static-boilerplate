@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import component from 'lib/component'
+import component from 'lib/Component'
 import DataStore from 'stores/DataStore'
 import DataActions from 'actions/DataActions'
 

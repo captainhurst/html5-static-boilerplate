@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import component from 'lib/component'
+import component from 'lib/Component'
 import Style from 'lib/Style'
 
 const MONSTER_MASH = 'http://33.media.tumblr.com/44b10800fe9488fca280845bb6287c4f/tumblr_mu0d7lEdIe1s5e5bko1_400.gif';
