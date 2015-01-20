@@ -9,21 +9,18 @@ export default component({
     }
   },
 
-  onSubmit(event, props, state) {
-    window.alert(state.message)
-    event.preventDefault()
+  onSubmit(event) {
+    event.preventDefault();
+    var message = this.ref('message')
+    window.alert(message.value);
   },
 
-  onChange(event) {
-    this.setState({ message: event.target.value })
-  },
-
-  render(props, state) {
+  render() {
     var {form, input, button} = this.dom
-    var {onSubmit, onChange} = this
+    var {onSubmit} = this
 
     return form({ onSubmit },
-      input({ placeholder: 'enter a message', type: 'text' }),
+      input({ ref: 'message', placeholder: 'enter a message', type: 'text' }),
       button({ type: 'submit' }, 'Alert')
     );
   }
