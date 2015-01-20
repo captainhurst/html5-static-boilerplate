@@ -1,4 +1,4 @@
-import {h} from 'virtual-dom';
+import {dom} from 'deku';
 
 var elements = {};
 
@@ -13,11 +13,9 @@ var elements = {};
 `
 .split(/\s+/)
 .forEach(function (selector) {
-  elements[selector] = function (properties, children) {
-    return h(selector, properties, children);
+  elements[selector] = function (props, kids) {
+    return dom(selector, props, kids);
   };
 });
-
-elements.el = h;
 
 export default elements;
