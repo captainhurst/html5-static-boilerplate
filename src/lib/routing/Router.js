@@ -54,7 +54,7 @@ class Router {
 
     if (req.hash !== window.location.hash) {
       window.location.hash = req.hash;
-      req.abandon();
+      req.abandoned();
       return req;
     }
 

@@ -4,11 +4,11 @@
   "private": true,
   "version": "0.0.0",
   "license": "Apache 2.0",
-
   "repository": "git@github.com:spenceralger/html5-static-boilerplate.git",
   "author": "Spencer Alger <spencer@spenceralger.com>",
-
-  "dependencies": {},
+  "dependencies": {
+    "deku": "~0.0.12"
+  },
   "devDependencies": {
     "webcomponentsjs": "~0.5.2",
     "domready": "~1.0.7"

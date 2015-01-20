@@ -2,6 +2,7 @@ import _ from 'lodash'
 import {h, patch, diff, create} from 'virtual-dom'
 import isVnode from 'virtual-dom/vnode/is-vnode'
 import elements from 'lib/virtual-dom-elements'
+import {ListenerMethods} from 'reflux'
 
 class Component extends HTMLElement {
   static register(tagName, SubComponent) {
@@ -22,6 +23,8 @@ class Component extends HTMLElement {
 
   constructor() {
     this.dom = elements
+    this._props = {};
+    this._state = this.initialState();
   }
 
   /************
@@ -51,18 +54,30 @@ class Component extends HTMLElement {
 
   attachedCallback() {
     if (this.render) {
-      this.setContent(this.render());
+      this.setContent(this.render(this._props, this._state));
     }
+
+    this.afterMount();
   }
 
   detachedCallback() {
-
+    this.stopListeningToAll();
   }
 
   attributeChangedCallback(/* attrName, oldVal, newVal */) {
 
   }
 
+  setState(state) {
+    this._state = state;
+    this.setContent(this.render(this._props, this._state));
+  }
+
+  afterMount() {}
+
+  initialState() {
+    return {};
+  }
 
   /************
    * RENDERING
@@ -122,4 +137,5 @@ class Component extends HTMLElement {
   }
 }
 
+_.assign(Component.prototype, ListenerMethods);
 export default Component
