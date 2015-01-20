@@ -60,7 +60,7 @@ gulp.task('server', function (done) {
 
   app.listen(8000, function (err) {
     if (err) done(new gutil.PluginError('webpack', err));
-    else gutil.log('Server listening at http://localhost:8080');
+    else gutil.log('Server listening at http://localhost:8000');
   });
 });
 
