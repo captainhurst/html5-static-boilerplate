@@ -10,17 +10,22 @@ class Component extends DekuComponent {
       throw new TypeError(`Component is an abstract class and shouldn't be instantiated directly`);
     }
 
-    var prototype = SubComponent.prototype;
-    if (!(prototype instanceof Component)) {
+    if (!(SubComponent.prototype instanceof Component)) {
       throw new TypeError(`SubComponent should inherit from Component`);
     }
 
-    SubComponent.Element =
-    prototype.Element =
-    document.registerElement(tagName, {
-      prototype: prototype
+    var elementProto = Object.create(HTMLElement.prototype);
+    for (let p = SubComponent.prototype;;) {
+      _.defaults(elementProto, p);
+      if (p.constructor === DekuComponent) break;
+      p = Object.getPrototypeOf(p);
+    }
+
+    var Element = document.registerElement(tagName, {
+      prototype: elementProto
     });
 
+    SubComponent.Element = SubComponent.prototype.Element = Element;
     return SubComponent
   }
 
@@ -31,22 +36,10 @@ class Component extends DekuComponent {
 /************
  * DOM CALLBACKS
  ************/
-  createdCallback() {
-    this.componentConstructor.call(this)
-    _.bindAll(this)
-  }
-
-  attachedCallback() {
-
-  }
-
-  detachedCallback() {
-
-  }
-
-  attributeChangedCallback(/* attrName, oldVal, newVal */) {
-
-  }
+  createdCallback() {}
+  attachedCallback() {}
+  detachedCallback() {}
+  attributeChangedCallback(/* attrName, oldVal, newVal */) {}
 }
 
 export default Component

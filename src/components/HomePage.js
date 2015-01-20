@@ -1,4 +1,4 @@
-import Component from 'Component';
+import Component from 'lib/Component'
 
 class HomePage extends Component {
   render() {
@@ -7,4 +7,4 @@ class HomePage extends Component {
   }
 }
 
-export default Component.register('home-page', HomePage);
+export default Component.register('home-page', HomePage)

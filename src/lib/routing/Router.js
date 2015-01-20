@@ -1,12 +1,14 @@
 import _ from 'lodash'
 
-import Route from 'lib/routing/Route';
-import Request from 'lib/routing/Request';
+import Component from 'lib/Component'
+import Route from 'lib/routing/Route'
+import Request from 'lib/routing/Request'
 
 class Router {
-  constructor() {
-    this.routes = [];
-    this.fallback = [];
+  constructor(el) {
+    this.el = el
+    this.routes = []
+    this.fallback = []
   }
 
   /**
@@ -16,7 +18,7 @@ class Router {
    * @param  {...function|Component} - any number of middleware elements to process for this route
    */
   on(path, ...fns) {
-    this._makeRoutes(this.routes, path, fns);
+    this._makeRoutes(this.routes, path, fns)
   }
 
 
@@ -26,7 +28,7 @@ class Router {
    * @param  {...function|Component} - any number of middleware elements to process for this route
    */
   otherwise(...fns) {
-    this._makeRoutes(this.fallback, null, fns);
+    this._makeRoutes(this.fallback, null, fns)
   }
 
   /**
@@ -37,10 +39,10 @@ class Router {
    */
   start() {
     window.addEventListener('hashchange', ()=> {
-      this.route(window.location.hash);
-    });
+      this.route(window.location.hash)
+    })
 
-    return this.route(window.location.hash);
+    return this.route(window.location.hash)
   }
 
   /**
@@ -50,17 +52,17 @@ class Router {
    * @return {undefined}
    */
   route(hash) {
-    var req = this.req = new Request(hash);
+    var req = this.req = new Request(hash)
 
     if (req.hash !== window.location.hash) {
-      window.location.hash = req.hash;
-      req.abandon();
-      return req;
+      window.location.hash = req.hash
+      req.abandoned()
+      return req
     }
 
-    this._dispatch(req, this.routes, this.fallback);
+    this._dispatch(req, this.routes, this.fallback)
 
-    return req;
+    return req
   }
 
   /**
@@ -71,21 +73,28 @@ class Router {
    * @param {array} fns - the routes to add
    */
   _makeRoutes(where, path, fns) {
-    var q = fns.slice(0);
+    var q = fns.slice(0)
 
     while(q.length) {
-      let fn = q.shift();
+      let fn = q.shift()
 
       if (_.isArray(fn)) {
-        q = q.concat(fn);
-        break;
+        q = q.concat(fn)
+        break
       }
 
-      if (path == null) {
-        where.push({ fn });
-      } else {
-        where.push(new Route(path, fn));
+      if (fn.prototype instanceof Component) {
+        fn = this._wrapView(fn);
       }
+
+      where.push(new Route(path, fn))
+    }
+  }
+
+  _wrapView(View) {
+    return (req) => {
+      req.View = View;
+      this.el.handleRequest(req);
     }
   }
 
@@ -98,29 +107,29 @@ class Router {
    * @return {[type]}           [description]
    */
   _dispatch(req, ...routeSets) {
-    var q = _.flatten(routeSets);
+    var q = _.flatten(routeSets)
 
     var next = () => {
       if (req !== this.req) {
-        req.abandon();
-        return;
+        req.abandoned()
+        return
       }
 
       if (!q.length) {
-        req.unhandled();
-        return;
+        req.unhandled()
+        return
       }
 
-      if (req.try(q.shift(), next)) {
+      if (q.shift().try(req, next)) {
         // fork the req object to keep history via prototype chain
-        req = this.req = Object.create(req);
+        req = this.req = Object.create(req)
       } else {
-        setImmediate(next);
+        setImmediate(next)
       }
-    };
+    }
 
-    setImmediate(next);
+    setImmediate(next)
   }
 }
 
-export default Router;
+export default Router
