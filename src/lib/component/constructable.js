@@ -7,8 +7,8 @@ function constructable(constructor) {
   return function (Component) {
     var initialState = Component.prototype.initialState;
     Component.prototype.initialState = function () {
-      constructor.call(this);
-      return initialState.call(this);
+      constructor.apply(this, arguments);
+      return initialState.apply(this, arguments);
     };
   };
 }
