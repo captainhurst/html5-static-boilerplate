@@ -21,6 +21,6 @@ router.otherwise(mainView.setter(NotFoundPage));
 
 // attach the mainView to the DOM
 domready(function () {
-  document.body.appendChild(mainView);
+  mainView.render(document.body);
   router.start();
 });
