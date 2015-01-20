@@ -1,9 +1,17 @@
+import _ from 'lodash';
 import Component from 'lib/Component'
 
 import DataStore from 'stores/DataStore';
 import DataActions from 'actions/DataActions';
 
 class HomePage extends Component {
+  constructor() {
+    super()
+
+    this.messageLoader = _.memoize((msg) => {
+      return _.bind(this.loadMessage, this, msg);
+    });
+  }
 
   initialState() {
     return {
@@ -14,10 +22,10 @@ class HomePage extends Component {
   }
 
   afterMount() {
-    this.listenTo(DataStore, this.message);
+    this.listenTo(DataStore, this.setMessage);
   }
 
-  updateMessage(message) {
+  setMessage(message) {
     this.setState({
       message : message,
       loading : false
@@ -25,7 +33,6 @@ class HomePage extends Component {
   }
 
   loadMessage(msg) {
-    console.log('lol');
     this.setState({
       loading : true
     });
@@ -34,16 +41,15 @@ class HomePage extends Component {
   }
 
   render(props, state) {
-    var {button, div} = this.dom;
+    var {p, button} = this.dom;
 
     if (state.loading) {
-      return div('Loading...');
+      return p('Loading...');
     }
-    debugger;
-    return button(
-      { 'ev-click' : this.loadMessage.bind(null, 'World') },
-      state.message || state.defaultMessage
-    );
+
+    var msg = state.message || state.defaultMessage;
+    var onClick = this.messageLoader('World')
+    return button({ onClick }, msg);
   }
 }
 

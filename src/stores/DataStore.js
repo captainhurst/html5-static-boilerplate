@@ -6,7 +6,7 @@ export default Reflux.createStore({
 
   onLoad(userInput) {
     setTimeout(() => {
-      this.trigger('Hello' + userInput);
-    }, 5000);
+      this.trigger('Hello ' + userInput);
+    }, 2500);
   }
 });

@@ -7,31 +7,42 @@ var DekuComponent = deku.component();
 
 class Component extends DekuComponent {
   static register(tagName, SubComponent) {
+    // ensure Component stays an abstract
     if (SubComponent === Component) {
       throw new TypeError(`Component is an abstract class and shouldn't be instantiated directly`);
     }
 
-    if (!(SubComponent.prototype instanceof Component)) {
+    // ensure that SubComponent is really a SubComponent
+    var proto = SubComponent.prototype;
+    if (!(proto instanceof Component)) {
       throw new TypeError(`SubComponent should inherit from Component`);
     }
 
-    var elementProto = Object.create(HTMLElement.prototype);
-    for (let p = SubComponent.prototype;;) {
-      _.defaults(elementProto, p);
+    // override the render method for content wrapping
+    proto.tagName = tagName;
+    proto.renderContents = proto.render;
+    proto.render = Component.prototype.render;
+
+    // setup the prototype for our custom element
+    var el = Object.create(HTMLElement.prototype);
+    for (let p = proto;;) {
+      _.defaults(el, p);
       if (p.constructor === DekuComponent) break;
       p = Object.getPrototypeOf(p);
     }
 
-    var Element = document.registerElement(tagName, {
-      prototype: elementProto
-    });
-
-    SubComponent.Element = SubComponent.prototype.Element = Element;
+    // create the custom element
+    var Element = document.registerElement(tagName, { prototype: el });
+    SubComponent.Element = proto.Element = Element;
     return SubComponent
   }
 
   constructor() {
     this.dom = elements
+  }
+
+  render(props, state) {
+    return deku.dom(this.tagName, {}, this.renderContents(props, state));
   }
 
 /************
