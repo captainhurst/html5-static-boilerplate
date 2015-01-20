@@ -1,12 +1,12 @@
 import _ from 'lodash'
-import {h, patch, diff, createElement} from 'virtual-dom'
+import {h, patch, diff, create} from 'virtual-dom'
 import isVnode from 'virtual-dom/vnode/is-vnode'
 import elements from 'lib/virtual-dom-elements'
 
 class Component extends HTMLElement {
   static register(tagName, SubComponent) {
     if (SubComponent === Component) {
-      throw new TypeError(`Component is an abtract class and shouldn't be instanciated directly`);
+      throw new TypeError(`Component is an abstract class and shouldn't be instantiated directly`);
     }
 
     var prototype = SubComponent.prototype;
@@ -99,7 +99,7 @@ class Component extends HTMLElement {
     if (!this._vtree) {
       this._vtree = tree;
       this._vtree.children.forEach((child) => {
-        this.appendChild(createElement(child));
+        this.appendChild(create(child));
       });
       return;
     }
