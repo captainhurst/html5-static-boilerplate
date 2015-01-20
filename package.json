@@ -8,7 +8,7 @@
   "author": "Spencer Alger <spencer@spenceralger.com>",
   "scripts": {
     "setup": "[ -d node_modules ] || npm install; [ -d bower_components ] || bower install;",
-    "dev": "npm run setup && webpack-dev-server"
+    "dev": "npm run setup && gulp server"
   },
   "dependencies": {},
   "devDependencies": {
