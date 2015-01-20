@@ -3,8 +3,7 @@ import component from 'lib/Component'
 export default component({
   tagName: 'form-page',
 
-  initialState(props) {
-    debugger;
+  initialState() {
     return {
       message: 'enter message here'
     }
