@@ -1,16 +1,14 @@
 import _ from 'lodash'
-
-import Component from 'lib/Component'
+import component from 'lib/component'
 import Style from 'lib/Style'
 
 const MONSTER_MASH = 'http://33.media.tumblr.com/44b10800fe9488fca280845bb6287c4f/tumblr_mu0d7lEdIe1s5e5bko1_400.gif';
 const PEACE_MAN = 'http://media.tumblr.com/tumblr_m4xm7swFpC1qj3ir1.gif';
 
-class UserPage extends Component {
+export default component({
+  tagName: 'user-page',
 
   constructor() {
-    super()
-
     this.toggleImg = _.bind(this.toggleImg, this)
     this.imgStyle = new Style({ cursor: 'pointer' })
     this.headerAttr = {
@@ -18,19 +16,19 @@ class UserPage extends Component {
         textAlign: 'left'
       })
     }
-  }
+  },
 
   initialState() {
     return {
       url: MONSTER_MASH
     }
-  }
+  },
 
   toggleImg(event, props, state) {
     this.setState({
       url: (state.url === MONSTER_MASH) ? PEACE_MAN : MONSTER_MASH
     })
-  }
+  },
 
   render(props, state) {
     var {id} = props.req.params
@@ -57,7 +55,5 @@ class UserPage extends Component {
       )
     )
   }
-}
-
-export default Component.register('user-page', UserPage)
+})
 

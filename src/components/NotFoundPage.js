@@ -1,10 +1,10 @@
-import Component from 'lib/Component'
+import component from 'lib/component'
 
-class NotFoundPage extends Component {
+export default component({
+  tagName: 'not-found-page',
+
   render() {
     var {h1} = this.dom
     return h1('Not Found')
   }
-}
-
-export default Component.register('not-found-page', NotFoundPage)
+})

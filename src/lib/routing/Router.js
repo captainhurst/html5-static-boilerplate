@@ -1,12 +1,12 @@
 import _ from 'lodash'
 
-import Component from 'lib/Component'
+import component from 'lib/component'
 import Route from 'lib/routing/Route'
 import Request from 'lib/routing/Request'
 
 class Router {
-  constructor(el) {
-    this.el = el
+  constructor(component) {
+    this.component = component
     this.routes = []
     this.fallback = []
   }
@@ -83,7 +83,7 @@ class Router {
         break
       }
 
-      if (fn.prototype instanceof Component) {
+      if (component.is(fn)) {
         fn = this._wrapView(fn);
       }
 
@@ -94,7 +94,7 @@ class Router {
   _wrapView(View) {
     return (req) => {
       req.View = View;
-      this.el.handleRequest(req);
+      this.component.setState({ req });
     }
   }
 

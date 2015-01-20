@@ -44,9 +44,9 @@ module.exports = function (paths, dev) {
 
     // utilize bower.json/main setting for bower_components
     plugins: [
-      new webpack.ResolverPlugin(
+      new webpack.ResolverPlugin([
         new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin("bower.json", ["main"])
-      )
+      ])
     ]
   };
 };
