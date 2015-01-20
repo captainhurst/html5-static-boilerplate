@@ -1,26 +1,60 @@
+import _ from 'lodash'
+
 import Component from 'lib/Component'
+import Style from 'lib/Style'
+
+const MONSTER_MASH = 'http://33.media.tumblr.com/44b10800fe9488fca280845bb6287c4f/tumblr_mu0d7lEdIe1s5e5bko1_400.gif';
+const PEACE_MAN = 'http://media.tumblr.com/tumblr_m4xm7swFpC1qj3ir1.gif';
 
 class UserPage extends Component {
-  render(props) {
+
+  constructor() {
+    super()
+
+    this.toggleImg = _.bind(this.toggleImg, this)
+    this.imgStyle = new Style({ cursor: 'pointer' })
+    this.headerAttr = {
+      style: new Style({
+        textAlign: 'left'
+      })
+    }
+  }
+
+  initialState() {
+    return {
+      url: MONSTER_MASH
+    }
+  }
+
+  toggleImg(event, props, state) {
+    this.setState({
+      url: (state.url === MONSTER_MASH) ? PEACE_MAN : MONSTER_MASH
+    })
+  }
+
+  render(props, state) {
     var {id} = props.req.params
-    var {div, h1, p, table, tr, th, td} = this.dom
+    var {url} = state
+    var {headerAttr, toggleImg, imgStyle} = this;
+    var {div, h1, p, table, tr, th, td, img, br} = this.dom
 
     return div({ class: 'user' },
       h1('User ' + id),
       table(
         tr(
-          th('Name'),
+          th(headerAttr, 'Name'),
           td('Sigourney')
         ),
         tr(
-          th('occupation'),
+          th(headerAttr, 'occupation'),
           td('Monster Acrobat')
         )
       ),
-      p(`
-        spencer wrote this amazing page, if you
-        like it then you should download hyrule
-      `)
+      p(
+        'Hooray monster twirlz',
+        br(),
+        img({ src: url, onClick: toggleImg, style: imgStyle })
+      )
     )
   }
 }

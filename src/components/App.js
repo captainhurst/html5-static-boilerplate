@@ -17,14 +17,11 @@ class App extends Component {
   }
 
   handleRequest(req) {
-    this.empty()
-    this.scene = req.View.render(this, { req })
-  }
-
-  empty() {
     while(this.hasChildNodes()) {
       this.removeChild(this.childNodes[0])
     }
+
+    this.scene = req.View.render(this, { req })
   }
 
   attachedCallback() {
