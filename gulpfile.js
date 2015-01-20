@@ -44,7 +44,8 @@ gulp.task('server', function (done) {
   app.use(express.static(paths.SRC));
   app.use(express.static(paths.BUILD));
 
-  getPacker(true).watch(200, function (err, stats) {
+  var packer = getPacker(true);
+  packer.watch(200, function (err, stats) {
     if (err)
       return gutil.error(new gutil.PluginError('webpack', err));
 
@@ -56,6 +57,10 @@ gulp.task('server', function (done) {
     });
 
     gutil.log(gutil.colors.green('✓'), 're-built', names.join(', '));
+  });
+
+  process.on('exit', function () {
+    packer.watcher.close();
   });
 
   app.listen(8000, function (err) {
