@@ -6,6 +6,7 @@ import domready from 'domready'
 import 'styles/style.less'
 
 // pages
+import FormPage from 'FormPage'
 import HomePage from 'HomePage'
 import UserPage from 'UserPage'
 import NotFoundPage from 'NotFoundPage'
@@ -16,6 +17,7 @@ var App = component({
   constructor() {
     this.router = new Router(this)
     this.router.on('/', HomePage)
+    this.router.on('/form', FormPage)
     this.router.on('/user/:id', UserPage)
     this.router.otherwise(NotFoundPage)
   },
