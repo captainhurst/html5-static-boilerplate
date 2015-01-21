@@ -8,8 +8,12 @@ function register(tagName, proto) {
     throw new TypeError('Missing tag name for component');
   }
 
-  var prototype = Object.create(HTMLElement.prototype, proto.dom)
-  document.registerElement(tagName, { prototype })
+  try {
+    var prototype = Object.create(HTMLElement.prototype, proto.dom)
+    document.registerElement(tagName, { prototype })
+  } catch (e) {
+    console.log('failed to register', tagName)
+  }
 }
 
 function asCustomElement(Component) {

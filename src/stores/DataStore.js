@@ -2,7 +2,7 @@ import Reflux from 'reflux';
 import DataActions from 'actions/DataActions'
 
 export default Reflux.createStore({
-  listenables : DataActions,
+  listenables: DataActions,
 
   onLoad(userInput) {
     setTimeout(() => {
