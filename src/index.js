@@ -9,6 +9,8 @@ import 'styles/style.less'
 import FormPage from 'FormPage'
 import HomePage from 'HomePage'
 import UserPage from 'UserPage'
+import LoginPage from 'LoginPage'
+import ProfilePage from 'ProfilePage'
 import NotFoundPage from 'NotFoundPage'
 
 var App = component({
@@ -18,6 +20,8 @@ var App = component({
     this.router = new Router(this)
     this.router.on('/', HomePage)
     this.router.on('/form', FormPage)
+    this.router.on('/login', LoginPage)
+    this.router.on('/profile', ProfilePage)
     this.router.on('/user/:id', UserPage)
     this.router.otherwise(NotFoundPage)
   },
