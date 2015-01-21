@@ -1,7 +1,7 @@
 import component from 'lib/Component'
 
 export default component({
-  tagName: 'selectable',
+  tagName: 'select-able',
 
   onChange(event, props) {
     props.onChange(this.ref('select', 'value'))
