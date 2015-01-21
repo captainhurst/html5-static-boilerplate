@@ -13,12 +13,26 @@ export default component
 function component(spec) {
   var DekuComponent = deku.component(_.omit(spec, 'constructor'))
 
-  // "plugins"
+  /**
+   * custom plugins
+   */
+
+  // allow registering multiple handlers for initialState, beforeMount, etc.
   DekuComponent.use(multipleHandlers)
+
+  // call the constructor before initialState
   DekuComponent.use(constructable(spec.constructor))
+
+  // create a customElement for each component with a tagName
   DekuComponent.use(asCustomElement)
+
+  // provide access to sub-elements
   DekuComponent.use(withRefs)
+
+  // mixin flux
   DekuComponent.use(flux)
+
+  // helpers for dom elements
   DekuComponent.use(dom)
 
   return DekuComponent
