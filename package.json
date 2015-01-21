@@ -23,6 +23,7 @@
     "less-loader": "~2.0.0",
     "lodash": "~2.4.1",
     "path-to-regexp": "~1.0.3",
+    "portfinder": "^0.3.0",
     "reflux": "git://github.com/spoike/refluxjs#master",
     "style-loader": "~0.8.3",
     "virtual-dom": "~1.1.0",

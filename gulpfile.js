@@ -4,6 +4,7 @@ var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var resolve = require('path').resolve;
 var abs = resolve.bind(null, __dirname);
+var portfinder = require('portfinder');
 
 /**
  * path config
@@ -63,9 +64,13 @@ gulp.task('server', function (done) {
     packer.watcher.close();
   });
 
-  app.listen(8000, function (err) {
+  portfinder.getPort(function (err, port) {
     if (err) done(new gutil.PluginError('webpack', err));
-    else gutil.log('Server listening at http://localhost:8000');
+
+    app.listen(port, function (err) {
+      if (err) done(new gutil.PluginError('webpack', err));
+      else gutil.log('Server listening at http://localhost:' + port);
+    });
   });
 });
 
